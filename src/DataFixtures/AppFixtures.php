@@ -79,6 +79,11 @@ class AppFixtures extends Fixture
                     ->setLatitude($faker->latitude)
                     ->setLongitude($faker->longitude);
 
+                for($k = 0; $k < 10; $k++) {
+                    $livreur->addSac($plat);
+                    $livreur->addSac($dessert);
+                }
+
                 $livreur2 = (new Livreur())
                     ->setStatus("Deconnecté")
                     ->setTelephone($faker->phoneNumber)
@@ -88,6 +93,11 @@ class AppFixtures extends Fixture
                     ->setCourriel($faker->email)
                     ->setLatitude($faker->latitude)
                     ->setLongitude($faker->longitude);
+
+                for($k = 0; $k < 10; $k++) {
+                    $livreur2->addSac($plat);
+                    $livreur2->addSac($dessert);
+                }
 
                 for($i = 0; $i < 2; $i++) {
                     $commandDelivered = (new Command())

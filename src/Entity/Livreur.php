@@ -64,9 +64,15 @@ class Livreur
      */
     private $commands;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Plat::class)
+     */
+    private $sac;
+
     public function __construct()
     {
         $this->commands = new ArrayCollection();
+        $this->sac = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -196,6 +202,32 @@ class Livreur
             if ($command->getLivreur() === $this) {
                 $command->setLivreur(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Plat[]
+     */
+    public function getSac(): Collection
+    {
+        return $this->sac;
+    }
+
+    public function addSac(Plat $sac): self
+    {
+        if (!$this->sac->contains($sac)) {
+            $this->sac[] = $sac;
+        }
+
+        return $this;
+    }
+
+    public function removeSac(Plat $sac): self
+    {
+        if ($this->sac->contains($sac)) {
+            $this->sac->removeElement($sac);
         }
 
         return $this;
